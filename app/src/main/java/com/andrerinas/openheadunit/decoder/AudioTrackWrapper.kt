@@ -587,6 +587,12 @@ class AudioTrackWrapper(
     }
 
     private fun cleanup() {
+        // stopPlayback() interrupts this thread. When the interrupt lands during a blocking track
+        // write rather than in poll(), its flag survives to here and the drain wait below threw on
+        // its first sleep - so a navigation prompt's last few hundred ms were released unplayed
+        // (seen ~10 times a day on a Sealion 06, always right after "Audio Stop"). The thread is
+        // ending anyway; clear the flag so the bounded drain can run.
+        Thread.interrupted()
         drainQueuedAudio()
         audioBufferPool.clear()
 

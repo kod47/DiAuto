@@ -10,6 +10,7 @@ Field-tested on a 2025 Sealion 06 (DiLink5.0, Android 12) with a Samsung S25 Ult
 - Status-bar-only and normal display modes: the projection stops above the BYD bottom bar (BydFullscreen only expands in immersive modes) and the kept navigation bar is reserved from its stable insets, so a flickering bar no longer resizes the projection or races the margins.
 - The loading/reconnecting overlay is removed whenever frames are reaching the screen, and the mid-session video watchdog is re-armed after a reconnect inside the same projection window.
 - Audio: playback starts after a short cushion (400 ms music, 80 ms speech) and rebuffers after the track runs dry, instead of stuttering on every wireless hiccup; underruns are logged.
+- Navigation voice prompts are no longer cut at the end: stopping a speech track interrupted its thread during a write, and the surviving interrupt aborted the wait for the buffered tail to play.
 - Log export: Downloads publishes a copy to the public Download/DiAuto folder, a "Choose folder…" location writes anywhere the system picker reaches, and the export dialog offers "Save as…". Exported logs append the app's diagnostic journal, because BYD firmware drops third-party app tags from logcat.
 - Diagnostic reports include a BYD navigation section (firmware fingerprint, receiver version/signature match, output in use, navigation output log lines). HUD output, window geometry, system insets and legacy turn details are journaled.
 - The unsaved-changes prompt on every settings screen offers Save as well as Discard / Cancel.
